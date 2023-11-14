@@ -62,9 +62,7 @@ namespace std {
         void showGraph();
 
         //additional code
-        void findComponents() {
-            
-        }
+        void findComponents(Vertex start);
     };
 }
 
