@@ -8,7 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <limits>
-#include "Graph.cpp"
+#include "HeidornGraph.cpp"
 using namespace std;
 
 int main() {
