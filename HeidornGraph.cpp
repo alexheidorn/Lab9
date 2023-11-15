@@ -3,7 +3,7 @@
 // Edited by Alex Heidorn 11/14/23
 //
 
-#include "Graph.h"
+#include "HeidornGraph.h"
 #include <iostream>
 #include <fstream>
 #include <stack>
@@ -63,6 +63,9 @@ namespace std {
                 int v2 = getOrInsertVertexName(v2name);
                 addEdge(v1,v2,val);
                 addEdge(v2,v1,val);
+
+                //assign componens
+                findComponents();
             }
             return true;
         }
@@ -114,13 +117,15 @@ namespace std {
                     int v = open.top();
                     open.pop();
             
-                    if (!explored[v]) //if the node HAS been explored, just ignore it!!!
+                    if (!explored[v]) { //if the node HAS been explored, just ignore it!!!
                         explored[v] = true;
                         vertexArray[v].setComponent(comp);
-                        for (const auto& edge : vertexArray[v].getEdges()) //only adds edges IF it hasn't been explored previously
-                            int v2 = edge.getVertex2();
+                        int v2; // must declare before use in loop
+                        for (auto edge : vertexArray[v].getEdges()){ //only adds edges IF it hasn't been explored previously
+                            v2 = edge.getVertex2();
                             if (!explored[v2]) { open.push(v2); }
-                                
+                        }
+                    }          
                 }
             }
         }
