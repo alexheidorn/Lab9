@@ -10,6 +10,7 @@
 
 namespace std {
     int Vertex::vertexNumber = 0;
+    int totalComponents = 0; //global component counter
 
     void Vertex::addEdge(int toV, double w) {
         edges.push_back(Edge(number,toV,w));
@@ -86,6 +87,9 @@ namespace std {
                 cout << v1 << endl;
                 cout << v2 << endl;
                 addEdge(v1,v2,val);
+
+                //assign componens
+                findComponents();
             }
             return true;
         }
@@ -98,17 +102,18 @@ namespace std {
         for (auto v: vertexArray) {
             v.showVertex();
         }
+        cout << endl;
     }
     //additional code
     void Graph::findComponents() { 
         vector<bool> explored(vertexArray.size(), false);
-        int comp = 0; //component number
-        
-        // for each vertex, starting at 0, if it's unexplored, add to the component number
-        // and perform to DFS, assigning that number to all conecnted vertices
+        totalComponents = 0; //reset totalComponents, incase the graph is changed later after running this fxn once already
+
+        //for each vertex, starting at 0, if it's unexplored, add to the component number
+        //and perform to DFS, assigning that number to all conecnted vertices
         for (int start = 0; start < vertexArray.size(); start++) {
             if (!explored[start]) { //if node has been explore (ie, has bene assigned a new component number), ignore it
-                comp++;
+                totalComponents++; //increment totalComponents
 
                 //dfs
                 stack<int> open;
@@ -119,7 +124,7 @@ namespace std {
             
                     if (!explored[v]) { //if the node HAS been explored, just ignore it!!!
                         explored[v] = true;
-                        vertexArray[v].setComponent(comp);
+                        vertexArray[v].setComponent(totalComponents);
                         int v2; // must declare before use in loop
                         for (auto edge : vertexArray[v].getEdges()){ //only adds edges IF it hasn't been explored previously
                             v2 = edge.getVertex2();
@@ -130,4 +135,17 @@ namespace std {
             }
         }
     };
+    void Graph::showComponents() {
+        cout << "Graph:\n";
+        int comp = 1;
+        //for each component, 
+        for (comp; comp < totalComponents; comp++) {
+            cout << "Component " << comp << ":\n";
+            for (auto v: vertexArray) {
+                if (v.getComponent() == comp) {//display all vertices within that component
+                    v.showVertex();
+                }
+            }
+        }
+    }
 }
