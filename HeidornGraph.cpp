@@ -139,7 +139,7 @@ namespace std {
         cout << "Graph:\n";
         int comp = 1;
         //for each component, 
-        for (comp; comp < totalComponents; comp++) {
+        for (comp; comp <= totalComponents; comp++) {
             cout << "Component " << comp << ":\n";
             for (auto v: vertexArray) {
                 if (v.getComponent() == comp) {//display all vertices within that component
