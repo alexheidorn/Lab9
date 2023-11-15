@@ -1,5 +1,6 @@
 //
 // Created by Richard Maclin on 10/23/23.
+// Edited by Alex Heidorn 11/14/23
 //
 
 #ifndef DJIKSTRAS_GRAPH_H
@@ -62,7 +63,7 @@ namespace std {
         void showGraph();
 
         //additional code
-        void findComponents(Vertex start);
+        void findComponents();
     };
 }
 
