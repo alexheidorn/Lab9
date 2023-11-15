@@ -46,6 +46,7 @@ namespace std {
 
         //additional code
         void setComponent(int c) { component = c; }
+        int getComponent() { return component; }
     };
 
     class Graph {
@@ -64,6 +65,7 @@ namespace std {
 
         //additional code
         void findComponents();
+        void showComponents();
     };
 }
 
